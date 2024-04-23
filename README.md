@@ -8,4 +8,16 @@ Follow these steps to get started:
 
 1. Download the setup script using curl:
    ```bash
-   curl -L -o setup.sh "https://github.com/ldjohn/demoSetups/raw/main/setup.sh"
+   curl -L -o petstore.sh "https://github.com/ldjohn/demoSetups/raw/main/petstore.sh"
+
+2. Download the setup script using wget:
+   ```bash  
+   wget "https://github.com/ldjohn/demoSetups/raw/main/petstore.sh" -O petstore.sh
+   
+3. Make the script executable
+   ```bash
+   chmod +x petstore.sh
+   
+4. Please review the script before running it, especially with elevated privileges, then run the setup script:
+   ```bash
+   ./petstore.sh
