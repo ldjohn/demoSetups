@@ -47,12 +47,27 @@ http {
     sendfile on;
 
     server {
+        listen 80;
         listen 443 ssl;
         server_name petstore.agent-j.com;
 
         ssl_certificate /etc/nginx/certs/nginx.crt;
         ssl_certificate_key /etc/nginx/certs/nginx.key;
 
+        location /v3 {
+            proxy_pass http://petstore:8080/v3;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+        location /v2 {
+            proxy_pass http://petstore:8080/v2;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
         location / {
             proxy_pass http://petstore:8080;
             proxy_set_header Host \$host;
@@ -74,13 +89,15 @@ services:
     ports:
       - "8080"
     environment:
-      - SWAGGER_HOST=https://petstore.agent-j.com:5002
+      - SWAGGER_HOST=https://petstore.agent-j.com:8080
+      - SWAGGER_BASE_PATH: /v3
     restart: unless-stopped
 
   nginx:
     image: nginx:latest
     ports:
-      - "5002:443"
+      - "443:443"
+      - "80:80"
     volumes:
       - ${PWD}/${CERT_PATH}:/etc/nginx/certs:ro
       - ${PWD}/${CONFIG_PATH}/nginx.conf:/etc/nginx/nginx.conf:ro
