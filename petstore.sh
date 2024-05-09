@@ -51,7 +51,7 @@ http {
     server {
         listen 80;
         listen 443 ssl;
-        server_name {DOMAIN};
+        server_name ${DOMAIN};
 
         ssl_certificate /etc/nginx/certs/nginx.crt;
         ssl_certificate_key /etc/nginx/certs/nginx.key;
@@ -91,7 +91,7 @@ services:
     ports:
       - "8080"
     environment:
-      - SWAGGER_HOST=https://{DOMAIN}:8080
+      - SWAGGER_HOST=https://${DOMAIN}:8080
       - SWAGGER_BASE_PATH=/v3
     restart: unless-stopped
 
@@ -112,4 +112,4 @@ echo "Docker Compose file created."
 # Step 7: Run Docker Compose
 cd ${CONFIG_PATH}
 docker-compose up -d
-echo "Docker Compose has been started -subj {DOMAIN} in detached mode."
+echo "Docker Compose has been started -subj ${DOMAIN} in detached mode."
