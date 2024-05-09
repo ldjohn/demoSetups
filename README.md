@@ -20,9 +20,9 @@ This project houses a few regularly used install scripts for tests and demos
    ```
  4. Please review the script before running it, especially with elevated privileges, then run the setup script:
    ```bash
-   ./petstore.sh
+   ./petstore.sh petstore.thisismydomain.com
    ```
  5. All in one:
    ```bash
-   curl -L -o petstore.sh "https://github.com/ldjohn/demoSetups/raw/main/petstore.sh" && chmod +x petstore.sh && ./petstore.sh
+   curl -L -o petstore.sh "https://github.com/ldjohn/demoSetups/raw/main/petstore.sh" && chmod +x petstore.sh && ./petstore.sh petstore.thisismydomain.com
    ```
