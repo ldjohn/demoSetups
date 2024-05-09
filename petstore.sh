@@ -90,7 +90,7 @@ services:
       - "8080"
     environment:
       - SWAGGER_HOST=https://petstore.agent-j.com:8080
-      - SWAGGER_BASE_PATH: /v3
+      - SWAGGER_BASE_PATH=/v3
     restart: unless-stopped
 
   nginx:
