@@ -1,5 +1,7 @@
 #!/bin/bash
-
+# pass the domain to the script as it executes the build
+# Default domain name
+DOMAIN=${1:-petstore.getYourMojoOn.com}
 # Define relative paths
 CERT_PATH="./certs"
 CONFIG_PATH="./config"
@@ -32,7 +34,7 @@ mkdir -p ${CONFIG_PATH}
 
 # Step 4: Generate SSL Certificates
 echo "Generating SSL certificates..."
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ${CERT_PATH}/nginx.key -out ${CERT_PATH}/nginx.crt -subj "/CN=petstore.agent-j.com"
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ${CERT_PATH}/nginx.key -out ${CERT_PATH}/nginx.crt -subj "/CN=${DOMAIN}"
 echo "SSL certificates generated."
 
 # Step 5: Create Nginx configuration
@@ -49,7 +51,7 @@ http {
     server {
         listen 80;
         listen 443 ssl;
-        server_name petstore.agent-j.com;
+        server_name {DOMAIN};
 
         ssl_certificate /etc/nginx/certs/nginx.crt;
         ssl_certificate_key /etc/nginx/certs/nginx.key;
@@ -89,7 +91,7 @@ services:
     ports:
       - "8080"
     environment:
-      - SWAGGER_HOST=https://petstore.agent-j.com:8080
+      - SWAGGER_HOST=https://{DOMAIN}:8080
       - SWAGGER_BASE_PATH=/v3
     restart: unless-stopped
 
@@ -110,4 +112,4 @@ echo "Docker Compose file created."
 # Step 7: Run Docker Compose
 cd ${CONFIG_PATH}
 docker-compose up -d
-echo "Docker Compose has been started in detached mode."
+echo "Docker Compose has been started -subj {DOMAIN} in detached mode."
