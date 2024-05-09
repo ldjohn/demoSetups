@@ -1,7 +1,10 @@
 #!/bin/bash
-# pass the domain to the script as it executes the build
-# Default domain name
+
+# pass the domain to the script as it executes the build, or use the default domain
 DOMAIN=${1:-petstore.getYourMojoOn.com}
+
+echo "Using domain: ${DOMAIN}"
+
 # Define relative paths
 CERT_PATH="./certs"
 CONFIG_PATH="./config"
@@ -112,4 +115,4 @@ echo "Docker Compose file created."
 # Step 7: Run Docker Compose
 cd ${CONFIG_PATH}
 docker-compose up -d
-echo "Docker Compose has been started -subj ${DOMAIN} in detached mode."
+echo "Docker Compose has been started ${DOMAIN} in detached mode."
