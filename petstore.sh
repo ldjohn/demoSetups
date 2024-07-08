@@ -121,3 +121,13 @@ echo "Docker Compose file created."
 cd ${CONFIG_PATH}
 sudo docker-compose up -d
 echo "Docker Compose has been started ${DOMAIN} in detached mode."
+
+# Step 8: Install net-tools
+if ! command -v ifconfig &> /dev/null
+then
+    echo "ifconfig not found, installing..."
+    sudo apt-install net-tools -y
+    echo "net-tools installed successfully."
+else
+    echo "net-tools is already installed."
+fi
