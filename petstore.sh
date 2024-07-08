@@ -99,7 +99,7 @@ services:
     ports:
       - "8080"
     environment:
-      - SWAGGER_HOST=https://${DOMAIN}:8080
+      - SWAGGER_HOST=https://${DOMAIN}
       - SWAGGER_BASE_PATH=/v3
     restart: unless-stopped
 
