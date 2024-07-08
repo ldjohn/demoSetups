@@ -126,7 +126,7 @@ echo "Docker Compose has been started ${DOMAIN} in detached mode."
 if ! command -v ifconfig &> /dev/null
 then
     echo "ifconfig not found, installing..."
-    sudo apt-install net-tools -y
+    sudo apt install net-tools -y
     echo "net-tools installed successfully."
 else
     echo "net-tools is already installed."
