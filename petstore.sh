@@ -50,10 +50,15 @@ events {
 
 http {
     sendfile on;
-
+    log_format  main  '\$remote_addr - xf \$http_x_forwarded_for - \$remote_user [\$time_local] "\$request" '
+                      '\$status \$body_bytes_sent "\$http_referer" '
+                      '"\$http_user_agent"';
     server {
         listen 80;
         listen 443 ssl;
+
+        access_log  /var/log/nginx/access.log  main;
+
         server_name ${DOMAIN};
 
         ssl_certificate /etc/nginx/certs/nginx.crt;
