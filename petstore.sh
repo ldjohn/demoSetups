@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Exit immediately if a command exits with a non-zero status, use as necessary
+# set -e
+
 # pass the domain to the script as it executes the build, or use the default domain
 DOMAIN=${1:-petstore.getYourMojoOn.com}
 
@@ -15,6 +18,7 @@ then
     echo "Docker could not be found, installing..."
     curl -fsSL https://get.docker.com -o get-docker.sh
     sh get-docker.sh
+    rm get-docker.sh
     echo "Docker installed successfully."
 else
     echo "Docker is already installed."
