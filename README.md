@@ -36,11 +36,11 @@
    ```bash
    sudo docker ps -a
    ```
-   for nginx:
+   for the nginx image:
    ```bash
    sudo docker ps --filter name=nginx
    ```
-   for petstore:
+   for the petstore image:
    ```bash
    sudo docker ps --filter name=petstore
    ```
@@ -50,7 +50,7 @@
    2081ad2df4d0   nginx:latest   "/docker-entrypoint.…"   15 hours ago   Up 15 minutes   0.0.0.0:80->80/tcp, :::80->80/tcp,       0.0.0.0:443->443/tcp, :::443->443/tcp   config_nginx_1
    ```
    This will provide you with the container ID, port info, and status for the image that it's running on.
-   Ports inside or outside mapping, etc., are shown, as well as the listening IP. 
+   Ports inside or outside mapping, 0.0.0.0:80->80/tcp, are shown, as well as the listening IP. 
    The nginx proxies the requests sent to these ports towards the docker container running the swagger.io pet store image.
 
 ### 7. To view the logs on the nginx docker
