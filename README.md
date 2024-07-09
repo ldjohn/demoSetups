@@ -1,6 +1,6 @@
 # demoSetups
 
-This project houses a few regularly used install scripts for tests and demos 
+This project houses a few regularly used install scripts for tests and demos. 
 This script sets up docker, docker-compose and deploys nginx as a front end for the swagger petstore https://petstore.swagger.io/
 ## Setup Instructions for petstore
 
