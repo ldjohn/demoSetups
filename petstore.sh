@@ -9,7 +9,7 @@ echo "Using domain: ${DOMAIN}"
 CERT_PATH="./certs"
 CONFIG_PATH="./config"
 
-# Step 1: Install Docker
+# Install Docker
 if ! command -v docker &> /dev/null
 then
     echo "Docker could not be found, installing..."
@@ -20,7 +20,7 @@ else
     echo "Docker is already installed."
 fi
 
-# Step 2: Install Docker Compose
+# Install Docker Compose
 if ! command -v docker-compose &> /dev/null
 then
     echo "Docker Compose could not be found, installing..."
@@ -31,16 +31,16 @@ else
     echo "Docker Compose is already installed."
 fi
 
-# Step 3: Create directories for certificates and configurations
+# Create directories for certificates and configurations
 mkdir -p ${CERT_PATH}
 mkdir -p ${CONFIG_PATH}
 
-# Step 4: Generate SSL Certificates
+# Generate SSL Certificates
 echo "Generating SSL certificates..."
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ${CERT_PATH}/nginx.key -out ${CERT_PATH}/nginx.crt -subj "/CN=${DOMAIN}"
 echo "SSL certificates generated."
 
-# Step 5: Create Nginx configuration
+# Create Nginx configuration
 cat <<EOF > ${CONFIG_PATH}/nginx.conf
 worker_processes 1;
 
@@ -90,7 +90,7 @@ http {
 EOF
 echo "Nginx configuration created."
 
-# Step 6: Create Docker Compose file
+# Create Docker Compose file
 cat <<EOF > ${CONFIG_PATH}/docker-compose.yml
 version: '3.3'
 services:
@@ -117,12 +117,12 @@ services:
 EOF
 echo "Docker Compose file created."
 
-# Step 7: Run Docker Compose
+# Run Docker Compose
 cd ${CONFIG_PATH}
 sudo docker-compose up -d
 echo "Docker Compose has been started ${DOMAIN} in detached mode."
 
-# Step 8: Install net-tools
+# Install net-tools
 if ! command -v ifconfig &> /dev/null
 then
     echo "ifconfig not found, installing..."
