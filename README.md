@@ -12,7 +12,7 @@
    ```bash 
    curl -L -o petstore.sh "https://github.com/ldjohn/demoSetups/raw/main/petstore.sh"
    ```
-###2. Download the setup script using wget:
+### 2. Download the setup script using wget:
    ```bash
    wget "https://github.com/ldjohn/demoSetups/raw/main/petstore.sh" -O petstore.sh
    ```
