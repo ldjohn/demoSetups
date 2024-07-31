@@ -32,15 +32,15 @@
 
 ### 6. View your docker image information.
    To view the information about the various docker images running, use these commands: 
-   for all docker images:
+   For all docker images:
    ```bash
    sudo docker ps -a
    ```
-   for the nginx image:
+   For the nginx image:
    ```bash
    sudo docker ps --filter name=nginx
    ```
-   for the petstore image:
+   For the petstore image:
    ```bash
    sudo docker ps --filter name=petstore
    ```
@@ -54,10 +54,14 @@
    The nginx proxies the requests sent to these ports towards the docker container running the swagger.io pet store image.
 
 ### 7. To view the logs on the nginx docker
-   paste the container ID in the following command:
+   Paste the container ID in the following command:
    ```bash
    sudo docker logs --follow <Container ID>   <--- the nginx Container ID
    sudo docker logs --follow 2081ad2df4d0
+   ```
+   This can be done in one command:
+   ```bash
+   sudo docker logs --follow $(sudo docker ps --filter name=petstore --format "{{.ID}}")
    ```
    This provides you with a "tail" of the logs. You should then see similar logs for the requests you received. 
    Note the x-forwarded-for data in the xf field. No data results in a "-" being shown:
