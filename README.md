@@ -1,7 +1,7 @@
 # demoSetups
 
    This project houses a few regularly used install scripts for tests and demos. 
-   This script sets up docker and docker-compose and deploys nginx as a front end for the swagger petstore image. 
+   This script sets up docker and docker-compose and deploys nginx as a front end for the swagger pet store image. 
    More about the swagger image here: https://petstore.swagger.io/
 
 ## Setup Instructions for petstore.io
@@ -40,7 +40,7 @@
    ```bash
    sudo docker ps --filter name=nginx
    ```
-   For the petstore image:
+   For the pet store image:
    ```bash
    sudo docker ps --filter name=petstore
    ```
