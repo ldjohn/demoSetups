@@ -1,7 +1,10 @@
 # demoSetups
 
    This project houses a few regularly used install scripts for tests and demos. 
-   This script sets up docker and docker-compose and deploys nginx as a front end for the swagger pet store image. 
+   This script sets up docker and docker-compose and deploys nginx with certs as a front end for the swagger pet store image. 
+   
+   Below, you will also be shown how to install the deep packet inspection certificate from the firewall on the perimeter, to secure the traffic to ad from the internet.
+   
    More about the swagger image here: https://petstore.swagger.io/
 
 ## Setup Instructions for petstore.io
