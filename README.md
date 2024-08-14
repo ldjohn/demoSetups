@@ -82,3 +82,48 @@
    /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
    /docker-entrypoint.sh: Configuration complete; ready for start up
    ```
+
+### 8. Install the Fortigate Deep Packet Inspection certificate on the Ubutu server
+
+Installing the FortiGate Deep Packet Inspection (DPI) certificate on your device is crucial to enable the firewall to inspect encrypted traffic, and detect and block compromised repository pulls or host traffic. This ensures enhanced security by intercepting potential threats that might bypass standard inspections.
+
+**Steps:**
+1. **Download the FortiGate CA SSL Certificate:**
+   Log in to your FortiGate (or get from the Administrator), navigate to **System > Certificates** and download the CA certificate.
+   It will probably be called `Fortinet_CA_SSL.cer`.
+2. **Create a Directory and Move the Certificate:**
+   On your Ubuntu machine, create a directory in your local root certificate store e.g., `/usr/local/share/ca-certificates/fortigate`.
+
+   Move the downloaded certificate into this directory, ensuring the file extension is changed to `.crt`.
+
+   It will also be a handy known location for systems to update the certs should the environment have automation like Ansible.
+
+   ```
+   sudo mkdir /usr/local/share/ca-certificates/fortigate
+   sudo cp ~/Downloads/Fortinet_CA_SSL.cer /usr/local/share/ca-certificates/fortigate/Fortinet_CA_SSL.crt
+   ```
+   
+4. **Update Certstore:**
+   Run the following to install the certificate.
+   ```
+   sudo update-ca-certificates
+   ```
+   You should see this information:
+   ```
+   Updating certificates in /etc/ssl/certs...
+   rehash: warning: skipping ca-certificates.crt, it does not contain exactly one certificate or CRL
+   1 added, 0 removed; done.
+   Running hooks in /etc/ca-certificates/update.d...
+   done.
+   ```
+
+5. **Check your work:**
+   Verify the installation by checking `/etc/ssl/certs/` or `/usr/local/share/ca-certificates/` for the Fortinet_CA_SSL.pem file, if that is what you called it.
+   ```
+   sudo ls /etc/ssl/certs/F*
+   ```
+   showing:
+   ```
+   /etc/ssl/certs/Fortinet_CA_SSL.pem
+   ```
+   You should be good to go when they enable DPI on your traffic and should have full protocol visibility for security purposes.
