@@ -119,8 +119,11 @@ Installing the FortiGate Deep Packet Inspection (DPI) certificate on your device
    Running hooks in /etc/ca-certificates/update.d...
    done.
    ```
-
-5. **Check your work:**
+   All in one
+   ```
+   sudo mkdir /usr/local/share/ca-certificates/fortigate && sudo cp ~/Fortinet_CA_SSL.cer /usr/local/share/ca-certificates/fortigate/Fortinet_CA_SSL.crt && sudo update-ca-certificates
+   ```
+6. **Check your work:**
    Verify the installation by checking `/etc/ssl/certs/` or `/usr/local/share/ca-certificates/` for the Fortinet_CA_SSL.pem file, if that is what you called it.
    ```
    sudo ls /etc/ssl/certs/F*
